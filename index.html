@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href=".node_modules/css/popupS.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="output"></div>
+    <div>
+        <label>Add</label><input id="add" type="checkbox"></input>
+        <br>
+        <label>Remove</label><input id="remove" type="checkbox"></input>
+        <br>
+
+
+        BOOK: <input id="book"type="checkbox" oninput="bookornote()">
+        NOTE: <input  id="note" type="checkbox" onclick="bookornote()">
+        <br>
+
+
+        <div id="bookDIV" style="visibility: hidden; position:absolute;">
+        <label >Title: </label>
+        <input type='text' id='titleBook'>by<input type="text" id="author">
+        NOTE<textarea id='bookNote'></textarea>
+        </div>
+        <div id="noteDIV" style="visibility: hidden;">
+            <label >Title: </label>
+            <input type='text' id='titleNote'>
+            <br>BODY: <input type="text" id="body">
+        </div>  
+        <br>
+
+        <input type="submit" value="Submit" onclick="subb()" >
+    </div>
+    <div id="display"></div>
+    <!-- <input id="live" type="text" oninput="live()"> -->
+    <script>
+        const fs = require('fs');
+        const noteJSON = fs.readFileSync('./notedb.json').toString();
+        document.getElementById('display').innerHTML = JSON.parse(noteJSON);
+
+        function bookornote(){
+            if(document.getElementById('note').checked & document.getElementById('book').checked){
+                document.getElementById('bookDIV').style.visibility = 'hidden';
+                document.getElementById('noteDIV').style.visibility = 'hidden';
+                document.getElementById('book').checked = false;
+                document.getElementById('note').checked = false;
+                alert('Either a NOTE or a BOOK can be added.');
+                
+            }
+            else if(document.getElementById('book').checked){
+                document.getElementById('bookDIV').style.visibility = 'visible';
+                document.getElementById('noteDIV').style.visibility = 'hidden';
+            }
+            else if(document.getElementById('note').checked){
+                document.getElementById('bookDIV').style.visibility = 'hidden';
+                document.getElementById('noteDIV').style.visibility = 'visible';
+            }
+            
+            else{
+                document.getElementById('bookDIV').style.visibility = 'hidden';
+                document.getElementById('noteDIV').style.visibility = 'hidden';
+            }
+        }
+        function subb(){
+            if(document.getElementById('add').checked != document.getElementById('remove').checked){
+        const data = {
+            add: document.getElementById('add').checked,
+            remove: document.getElementById('remove').checked,
+            bookCheck: document.getElementById('book').checked,
+            notecheck: document.getElementById('note').checked,
+            book: {
+                title: document.getElementById('titleBook').value,
+                author: document.getElementById('author').value,
+                note: document.getElementById('bookNote').value
+            },
+            note: {
+                title: document.getElementById('titleNote').value,
+                body: document.getElementById('body').value
+            }
+        }
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }
+        
+        const ftch = fetch('http://matzle.com:420/api', options).then(resp => resp.json()).then(txt => document.getElementById('display').innerHTML = JSON.stringify(txt))
+    }
+    else{
+        alert('Either ADD or REMOVE. Both operations cannot be done at once.')
+    }
+}
+// const err32 = {
+//             add: false,
+//             remove: false,
+//             bookCheck: false,
+//             noteCheck: false,
+//             book: {
+//                 title: '' ,
+//                 author: ''
+//             },
+//             note: {
+//                 title: '' ,
+//                 body: ''
+//             }
+//         }
+// // function live(){
+//     if(document.getElementById('live').value == 'add'){
+//      err32.add = true, err32.remove = false;
+//     }
+//     if(document.getElementById('live').value == 'remove'){
+//      err32.add = false, err32.remove = true;
+//     }
+    
+//     console.log(err32)
+// }
+
+        </script>
+</body>
+</html>
