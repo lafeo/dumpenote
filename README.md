@@ -9,5 +9,5 @@
 2. adding/removing of notes needs to be worked on
 3. A working feedback system needs to be added, which instead of logging 'title exists', 'new book added' etc. logs it to the user itself.
 
------ Future
+----- Future Of The Project
 1. A user based system, with a common database should begin working. 
