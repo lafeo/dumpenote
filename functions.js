@@ -1,54 +1,56 @@
 const fs = require('fs')
-
-
-
+const app = require('./app.js')
 const parser = (STRING) => {
+    
     if(STRING.add){
         addBook(STRING.book.title, STRING.book.author, STRING.book.note);
     }
     else if(STRING.remove){
-        addBook(STRING.book.title)
+        removeBook(STRING.book.title)
     }
 }
 const removeBook = (title) => {
-    const notesArr = loadBook()
-    const notesArr2 = []
+    const bookArr = loadBook()
+    const bookArr2 = []
     var contains = false
-    notesArr.filter((note) => {
-        if(note.title === title){
-            contains = trues
+    bookArr.filter((book) => {
+        if(book.title === title){
+            contains = true
         }
-        else if(note.title != title){
-            notesArr2.push({
-                title: note.title,
-                body: note.body
+        else if(book.title != title){
+            bookArr2.push({
+                title: book.title,
+                body: book.body
             })
         }
     })
     if(!contains){
          console.log('book not found');
+         
         }
-    saveBook(notesArr2)
+    saveBook(bookArr2)
 
 }
 const addBook = (title, author, body) => {
-    const notesArr = loadBook()
+    const bookArr = loadBook()
 
-    const duplicateBook = notesArr.filter((note) => note.title === title)
+    const duplicateBook = bookArr.filter((note) => note.title === title)
     
     if (duplicateBook.length === 0) {
-        notesArr.push({
+        bookArr.push({
             title: title,
             author: author,
             note: body
         })
         console.log('new book added');
+        app.exceptionString = 'a new book is added'
     }
     else{
         console.log('title exists')
+        app.exceptionString = 'title exists'
         
     }
-    saveBook(notesArr)
+    saveBook(bookArr)
 }
 const saveBook = (notes) =>{
     fs.writeFileSync('notedb.json', JSON.stringify(notes))
