@@ -73,7 +73,7 @@
                 },
                 body: JSON.stringify(data),
             }
-            const ftch = fetch('http://matzle.com:420/data', options).then(resp => resp.json()).then((txt) => {
+            const ftch = fetch('http://url/postREQ', options).then(resp => resp.json()).then((txt) => {
                 const fetchedData = (txt.title)
                 var bookString = [];
                 fetchedData.filter((book) => {bookString.push('<br>Title: ' + book.title + '<br>Author:' + book.author + '<br>Note:'+book.note+'<br><br>')})
@@ -141,7 +141,7 @@
                     },
                     body: JSON.stringify(data),
                 }
-                const ftch = fetch('http://matzle.com:420/api', options).then(resp => resp.json()).then((txt) => {
+                const ftch = fetch('http://url/postREQ', options).then(resp => resp.json()).then((txt) => {
                     var fetchedData = (txt.title)
                     
                     document.getElementById('prompt').innerHTML = fetchedData;//here we got the response
