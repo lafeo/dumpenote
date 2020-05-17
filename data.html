@@ -1,0 +1,45 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="subb()" >
+        <a href="./index.html">BACK TO INPUT</a>
+    <div id="display">
+        
+    </div>
+</body>
+<script>
+    function subb(){
+        const data = {
+                    add: '',
+                    remove: '',
+                    bookCheck: '',
+                    notecheck: '',
+                    book: {
+                        title: '',
+                        author: '',
+                        note: ''
+                    },
+                    note: {
+                        title: '',
+                        body: ''
+                    }
+                }
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                }
+                const ftch = fetch('http://localhost:420/data', options).then(resp => resp.json()).then((txt) => {
+                    var fetchedData = JSON.stringify(txt)
+                    document.getElementById('display').innerHTML = fetchedData;//here we got the response
+
+                })
+            }
+</script>
+</html> -->
