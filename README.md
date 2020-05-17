@@ -1,4 +1,4 @@
-# dumpenote
+# dumpnote
 
 1. popupj.js has been incorporated
 2. the submit button, now no longer causes problems when info. is being inputted (need to find a better alternative).
