@@ -4,7 +4,7 @@ const express = require('express');
 const functions = require('./functions.js');
 const app = express();
 
-app.listen(420, () => console.log('Listening at 420'));
+app.listen(PORT, () => console.log('Listening at PORT'));
 app.use(express.static('public'))
 app.use(express.json('1mb'))
 
