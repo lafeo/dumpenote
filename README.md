@@ -1,5 +1,8 @@
 # dumpnote
 
+https://www.producthunt.com/posts/dumpnote
+
+
 1. popupj.js has been incorporated
 2. the submit button, now no longer causes problems when info. is being inputted (need to find a better alternative).
 3. Now books can be removed, apart from being added to the database.
